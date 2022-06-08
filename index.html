@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>3D Minecraft</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+		}
+
+		#autojumpbutton {
+			position: absolute;
+			left: 20px;
+			top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="three.js"></script>
+	<!-- <script src="perlin.js"></script> -->
+	<script src="PointerLockControls.js"></script>
+	<script src="stats.js"></script>
+	<script type="text/javascript">
+
+		var stats = new Stats();
+		stats.showPanel(0); // 0:fps, 1:ms, 2:mb, 3+:custom
+		<!-- document.body.appendChild(stats.dom); -->
+
+		function animate() {
+			stats.begin();
+
+			// monitored code goes between this called functions
+
+			stats.end();
+
+			<!-- requestAnimationFrame(animate); -->
+		}
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		var controls = new THREE.PointerLockControls(camera, document.body);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		
+		faces = new Array()
+		
+		faces[0] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[0] .translate( 0, 0, 0 );
+
+		faces[1] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[1] .translate( 0, -1, 1 );
+
+		faces[2] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[2] .translate( 1, 0, 1 );
+
+		<!-- faces[3] = new THREE.BoxGeometry( 1, 1, 1 ); -->
+		<!-- faces[3] .translate( 0, 1, 1 ); -->
+
+		<!-- faces[4] = new THREE.BoxGeometry( 1, 1, 1 ); -->
+		<!-- faces[4] .translate( 1, 1, 0 ); -->
+
+		<!-- faces[5] = new THREE.BoxGeometry( 1, 1, 1 ); -->
+		<!-- faces[5] .translate( 1, 1, 1 ); -->
+
+		
+		const loader = new THREE.TextureLoader();
+		const cubeMaterials = [
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_3.png')}), //left side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_1.png') }), //right side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_5.png')}), //bottom side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_4.png')}), //top side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_2.png')}), //back side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_0.png')}), //front side
+		];
+		
+		faces.forEach(face=>{
+			const cube = new THREE.Mesh( face, cubeMaterials );
+			scene.add( cube );
+		})
+
+		camera.position.z = 1;
+		
+		function animate() {
+			<!-- cube.rotation.x += 0.01; -->
+			<!-- cube.rotation.y += 0.01; -->
+		
+			requestAnimationFrame( animate );
+			renderer.render( scene, camera );
+		}
+		animate();
+		
+				document.body.addEventListener("click", function () {
+			controls.lock();
+		});
+		controls.addEventListener("lock", function () {
+
+		});
+		controls.addEventListener("unlock", function () {
+
+		});
+	</script>
+</body>
+
+</html>
