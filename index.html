@@ -55,14 +55,14 @@
 		faces[2] = new THREE.BoxGeometry( 1, 1, 1 );
 		faces[2] .translate( 1, 0, 1 );
 
-		<!-- faces[3] = new THREE.BoxGeometry( 1, 1, 1 ); -->
-		<!-- faces[3] .translate( 0, 1, 1 ); -->
+		faces[3] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[3] .translate( -1, 0, 1 );
 
-		<!-- faces[4] = new THREE.BoxGeometry( 1, 1, 1 ); -->
-		<!-- faces[4] .translate( 1, 1, 0 ); -->
+		faces[4] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[4] .translate( -1, 1, -1 );
 
-		<!-- faces[5] = new THREE.BoxGeometry( 1, 1, 1 ); -->
-		<!-- faces[5] .translate( 1, 1, 1 ); -->
+		faces[5] = new THREE.BoxGeometry( 1, 1, 1 );
+		faces[5] .translate( 0, 0, 2 );
 
 		
 		const loader = new THREE.TextureLoader();
@@ -71,8 +71,8 @@
 			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_1.png') }), //right side
 			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_5.png')}), //bottom side
 			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_4.png')}), //top side
-			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_2.png')}), //back side
 			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_0.png')}), //front side
+			new THREE.MeshBasicMaterial({ map: loader.load('texture/panorama_2.png')}), //back side
 		];
 		
 		faces.forEach(face=>{
